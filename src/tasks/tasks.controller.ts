@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { Task } from './task.model';
 import { TasksService } from './tasks.service';
 
@@ -9,5 +9,19 @@ export class TasksController {
   @Get()
   getAllTasks(): Task[] {
     return this.tasksService.getAllTasks();
+  }
+
+  // generalist function
+  // @Post()
+  // createTask(@Body() body) {
+  //   console.log('body', body);
+  // }
+
+  @Post()
+  createTask(
+    @Body('title') title: string,
+    @Body('description') description: string,
+  ): Task {
+    return this.tasksService.createTask(title, description);
   }
 }
