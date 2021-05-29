@@ -9,7 +9,6 @@ import {
   Query,
   UsePipes,
   ValidationPipe,
-  NotFoundException,
 } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
@@ -31,13 +30,7 @@ export class TasksController {
 
   @Get('/:id')
   getTaskById(@Param('id') id: string): Task {
-    const found = this.tasksService.getTaskById(id);
-
-    if (!found) {
-      throw new NotFoundException();
-    }
-
-    return found;
+    return this.tasksService.getTaskById(id);
   }
 
   // generalist function
