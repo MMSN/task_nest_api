@@ -1,11 +1,17 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+require('dotenv').config();
+
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+
+const { DATABASE_HOST, DATABASE_PORT, DATABASE_USER, DATABASE_PASSWORD } =
+  process.env;
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: '98821088',
+  host: DATABASE_HOST,
+  port: parseInt(DATABASE_PORT),
+  username: DATABASE_USER,
+  password: DATABASE_PASSWORD,
   database: 'taskmanagement',
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
   autoLoadEntities: true,
